@@ -1,0 +1,119 @@
+[gd_scene load_steps=10 format=3 uid="uid://37khcsvl68p6"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_5oeeg"]
+[ext_resource type="Texture2D" uid="uid://cj7aspmuq2nlg" path="res://icon.svg" id="1_7eqtk"]
+[ext_resource type="Script" path="res://Player2.gd" id="3_tgu7m"]
+[ext_resource type="Script" path="res://Ball.gd" id="4_b0heg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n777f"]
+size = Vector2(104.228, 124.235)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dmppy"]
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_spnqj"]
+radius = 19.57
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kbdjt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7e1pi"]
+size = Vector2(1144, 40)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(1060, 315)
+scale = Vector2(0.273438, 1.0625)
+motion_mode = 1
+script = ExtResource("1_5oeeg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(-0.671387, -0.382324)
+shape = SubResource("RectangleShape2D_n777f")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture = ExtResource("1_7eqtk")
+
+[node name="Player2" type="CharacterBody2D" parent="."]
+position = Vector2(91, 327)
+scale = Vector2(0.273438, 1.0625)
+motion_mode = 1
+script = ExtResource("3_tgu7m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2"]
+position = Vector2(2.74281, 0)
+shape = SubResource("RectangleShape2D_n777f")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player2"]
+texture = ExtResource("1_7eqtk")
+
+[node name="Ball" type="RigidBody2D" parent="."]
+position = Vector2(578, 324)
+mass = 0.01
+physics_material_override = SubResource("PhysicsMaterial_dmppy")
+gravity_scale = 0.0
+custom_integrator = true
+max_contacts_reported = 4
+contact_monitor = true
+script = ExtResource("4_b0heg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+position = Vector2(0, 1.19209e-07)
+shape = SubResource("CircleShape2D_spnqj")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ball"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_7eqtk")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Ball"]
+process_material = SubResource("ShaderMaterial_kbdjt")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 577)
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+offset_right = 1146.0
+offset_bottom = 42.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(574, 22)
+shape = SubResource("RectangleShape2D_7e1pi")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(1, 52)
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D2"]
+offset_right = 1146.0
+offset_bottom = 42.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(574, 22)
+shape = SubResource("RectangleShape2D_7e1pi")
+
+[node name="Score1" type="RichTextLabel" parent="."]
+offset_left = 218.0
+offset_top = 1.0
+offset_right = 273.0
+offset_bottom = 47.0
+theme_override_font_sizes/normal_font_size = 29
+
+[node name="Score2" type="RichTextLabel" parent="."]
+offset_left = 1092.0
+offset_top = 2.0
+offset_right = 1149.0
+offset_bottom = 50.0
+theme_override_font_sizes/normal_font_size = 29
+
+[node name="Score3" type="RichTextLabel" parent="."]
+offset_right = 460.0
+offset_bottom = 48.0
+theme_override_font_sizes/normal_font_size = 29
+text = "Retard 1 score:"
+
+[node name="Score4" type="RichTextLabel" parent="."]
+offset_left = 875.0
+offset_top = 3.0
+offset_right = 1335.0
+offset_bottom = 51.0
+theme_override_font_sizes/normal_font_size = 29
+text = "Retard 2 score:"
